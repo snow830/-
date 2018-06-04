@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登陆</title>
+<link rel="stylesheet" href="bootstrap.css">
+<link type="text/css" rel="stylesheet" href="style/reset.css">
+<link type="text/css" rel="stylesheet" href="style/main.css">
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript" src="js/ie6Fixpng.js"></script>
+<![endif]-->
+    <!-- <style>
+	body { margin: 0; }
+	canvas { width: 100%; height: 100% }
+	div{width: 160px;height:120px;background-color: #666}
+	#br{position: absolute;top:300px;left:400px;}
+	</style> -->
+<script src="threejs.js"></script>
+<style>
+	#br{position: absolute;top:200px;left:1000px;}
+	#tl{position: absolute;top:200px;left:100px;}
+	#rotationX{position: absolute;top:350px;left:100px;}
+	#rotationY{position: absolute;top:400px;left:100px;}
+</style>
+</head>
+<body>
+
+<div class="headerBar">
+	<div class="logoBar login_logo">
+		<div class="comWidth">
+			<div class="logo fl">
+				<a href="#"><img src="images/logo.jpg" alt="慕课网"></a>
+			</div>
+			<h3 class="welcome_title">欢迎登陆</h3>
+		</div>
+	</div>
+</div>
+
+<div class="loginBox">
+	<div class="login_cont">
+		<ul class="login">
+			<li class="l_tit">邮箱/用户名/手机号</li>
+			<li class="mb_10"><input type="text" class="login_input user_icon"></li>
+			<li class="l_tit">密码</li>
+			<li class="mb_10"><input type="text" class="login_input user_icon"></li>
+			<li class="autoLogin"><input type="checkbox" id="a1" class="checked"><label for="a1">自动登陆</label></li>
+			<li><input type="button" value="" class="login_btn"></li>
+		</ul>
+		<div class="login_partners">
+			<p class="l_tit">使用合作方账号登陆网站</p>
+			<ul class="login_list clearfix">
+				<li><a href="#">QQ</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">网易</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">新浪微博</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">腾讯微薄</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">新浪微博</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">腾讯微薄</a></li>
+			</ul>
+		</div>
+	</div>
+	<a class="reg_link" href="#"></a>
+</div>
+
+<div class="hr_25"></div>
+<div class="footer">
+	<p><a href="#">慕课简介</a><i>|</i><a href="#">慕课公告</a><i>|</i> <a href="#">招纳贤士</a><i>|</i><a href="#">联系我们</a><i>|</i>客服热线：400-675-1234</p>
+	<p>Copyright &copy; 2006 - 2014 慕课版权所有&nbsp;&nbsp;&nbsp;京ICP备09037834号&nbsp;&nbsp;&nbsp;京ICP证B1034-8373号&nbsp;&nbsp;&nbsp;某市公安局XX分局备案编号：123456789123</p>
+	<p class="web"><a href="#"><img src="images/webLogo.jpg" alt="logo"></a><a href="#"><img src="images/webLogo.jpg" alt="logo"></a><a href="#"><img src="images/webLogo.jpg" alt="logo"></a><a href="#"><img src="images/webLogo.jpg" alt="logo"></a></p>
+</div>
+
+
+
+<div id="tl"></div>
+<div id="br"></div>
+<h4 id="rotationX">rotationX:</h4>
+<h4 id="rotationY">rotationY:</h4>
+
+
+
+</body>
+<script>
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera( 75, 160/120, 0.1, 1000 );
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize( 160,120);
+
+var renderer2 = new THREE.WebGLRenderer();
+renderer2.setSize( 160,120);
+
+
+document.getElementById("tl").appendChild( renderer.domElement);
+
+document.getElementById("br").appendChild( renderer2.domElement);
+
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+
+camera.position.z = 5;
+
+function animate() {
+	requestAnimationFrame( animate );
+	cube.rotation.x += 0.1;
+	cube.rotation.y += 0.1;
+
+	document.getElementById("rotationX").innerHTML="rotationX:"+cube.rotation.x;
+	document.getElementById("rotationY").innerHTML="rotationY:"+cube.rotation.y;
+
+	renderer.render( scene, camera );
+	renderer2.render( scene, camera );
+}
+animate();
+</script>
+</html>
